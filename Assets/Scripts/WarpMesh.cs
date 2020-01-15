@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class WarpMesh : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class WarpMesh : MonoBehaviour
     private float [] _oscillationSpeed;
     private float [] _oscillationIndex;
     public float MaxOscillationSpeed = Mathf.PI / 8;
+    public float MinValue = 1f;
+    public float MaxValue = 2f;
     private Vector3[] _baseMesh;
 
     void Start()
@@ -27,15 +30,29 @@ public class WarpMesh : MonoBehaviour
 
     void Update()
     {
-        Vector3 inputVerts = _baseMesh;
+        Vector3[] inputVerts = Clone(_baseMesh);
         for (int i = 0; i < inputVerts.Length; i++)
         {
             _oscillationIndex[i] += _oscillationSpeed[i];
-            inputVerts[i] = inputVerts[i] * ((Mathf.Cos(_oscillationIndex[i]) + 2)/2);
+            float normValue = (Mathf.Cos(_oscillationIndex[i]) + 2) / 2f;
+            float scaledValue = Mathf.Lerp(MinValue, MaxValue, normValue); 
+            inputVerts[i] = inputVerts[i] * scaledValue;
         }
         Debug.Log("baseMesh  "+_baseMesh[0]);
 
         _mesh.vertices = inputVerts;
         _mesh.RecalculateBounds();
     }
+
+    Vector3[] Clone(Vector3[] src)
+    {
+        Vector3 [] newVec = new Vector3 [src.Length];
+        for (int i = 0; i < src.Length; i++)
+        {
+            newVec[i] = src[i];
+        }
+
+        return newVec;
+    }
+    
 }
