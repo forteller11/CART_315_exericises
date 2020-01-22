@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e1a1afb3-35c9-4c77-bf00-64ce29f0be1a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CART_315_exericises/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CART_315_exericises/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CART_315_exericises/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CART_315_exericises/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/New Folder.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarpMesh.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WarpMesh.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CustomRotate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CustomRotate.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Shader/TestGeometryShader.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Shader/TestGeometryShader.shader" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +21,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CustomRotate.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MeshManipulatorManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Shader/TestGeometryShader.shader" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ide.rider@1.1.0/Rider/Editor/RiderScriptEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Extensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../STM Metro Adventures/Assets/Scripts/PhysicsFloat.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -33,9 +33,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/MeshManipulatorController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Extensions.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MeshManipulatorManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/CustomRotate.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Shader/DistanceVerts.shader" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WarpMesh.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CustomRotate.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Shader/TestGeometryShader.shader" />
       </list>
     </option>
@@ -98,7 +98,7 @@
       <option name="presentableId" value="Default" />
       <updated>1579104830919</updated>
       <workItem from="1579104863764" duration="4223000" />
-      <workItem from="1579702703577" duration="5043000" />
+      <workItem from="1579702703577" duration="6834000" />
     </task>
     <servers />
   </component>

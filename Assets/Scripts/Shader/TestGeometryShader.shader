@@ -1,4 +1,6 @@
-﻿Shader "Unlit/TestGeometryShader"
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "Unlit/TestGeometryShader"
 {
     Properties
     {
@@ -14,33 +16,41 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #pragma geometry geo
-            // make fog work
-            #pragma multi_compile_fog
+      
+   
 
             #include "UnityCG.cginc"
 
             struct appdata
             {
                 float4 vertexModelSpace : POSITION;
-     
+                float3 normals : NORMAL;
             };
 
-            struct v2g
+            struct v2f
             {
                 float4 vertexClipPos : SV_POSITION;
+                float4 tint : COLOR;
+   
             };
             
-            struct g2f
+            /*struct g2f
             {
-                float4 vertexClipPosAltered : SV_POSITION;
-            };
+                float4 vertexClipPosAltered : SV_POSITION; 
+            };*/
 
 
-            v2g vert (appdata v)
+            v2f vert (appdata i)
             {
-                v2g o;
-                o.vertexClipPos = UnityObjectToClipPos(v.vertexModelSpace);
+                v2f o;
+                o.vertexClipPos = UnityObjectToClipPos(i.vertexModelSpace);
+                float4 vertexWorldPos = mul(unity_ObjectToWorld, i.vertexModelSpace);
+                float3 toCamDir = normalize(_WorldSpaceCameraPos - vertexWorldPos.xyz);
+                
+                o.tint = float4(1,1,1,1);
+               o.tint.xyz = toCamDir.xyz;
+                o.tint = abs(o.tint);
+                o.tint.w = 1;
                 return o;
             }
             /*[maxvertexcount(3)]
@@ -58,6 +68,7 @@
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = _Color;
+                col *= i.tint;
                 return col;
             }
             ENDCG

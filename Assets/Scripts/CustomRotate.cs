@@ -8,7 +8,12 @@ public class CustomRotate : MonoBehaviour
    public float RotateSpeed = 0.02f;
    void FixedUpdate()
    {
-      transform.Rotate(Axis, RotateSpeed);
+      if (Input.GetButton("Fire1"))
+      {
+         Debug.Log("rotate");
+         transform.Rotate(Axis, RotateSpeed);
+      }
+      
    }
     
 }
