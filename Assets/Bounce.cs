@@ -20,6 +20,8 @@ public class Bounce : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<AudioSource>().Play();
+        var src = other.GetComponent<AudioSource>();
+        if (src != null)
+            src.Play();
     }
 }

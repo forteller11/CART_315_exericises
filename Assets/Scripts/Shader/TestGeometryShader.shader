@@ -16,7 +16,8 @@ Shader "Unlit/TestGeometryShader"
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-      
+            #pragma geometry geom
+               #pragma target 4.0
    
 
             #include "UnityCG.cginc"
@@ -29,13 +30,13 @@ Shader "Unlit/TestGeometryShader"
 
             struct v2g
             {
-                float4 vertexModel: SV_POSITION;
+                float4 vertexClip: POSITION;
                 float4 tint : COLOR;
             };
             
             struct g2f
             {
-                float4 vertexAltered : SV_POSITION; 
+                float4 vertexAltered : POSITION; 
                 float4 tint: COLOR;
             };
 
@@ -44,38 +45,39 @@ Shader "Unlit/TestGeometryShader"
             {
                 v2g o;
                 //o.vertexClipPos = UnityObjectToClipPos(i.vertexModelSpace);
-                o.vertexModel = i.vertexModel;
+                o.vertexClip = UnityObjectToClipPos(i.vertexModel);
                 float4 vertexWorldPos = mul(unity_ObjectToWorld, i.vertexModel);
                 float3 toCamDir = normalize(_WorldSpaceCameraPos - vertexWorldPos.xyz);
                 
                 o.tint = float4(1,1,1,1);
-               o.tint.xyz = toCamDir.xyz;
+                o.tint.xyz = toCamDir.xyz;
                 o.tint = abs(o.tint);
                 o.tint.w = 1;
                 return o;
             }
             
+            //don't return stuff?
+            //return triangleStream?
             [maxvertexcount(3)]
-            v2g geo (
+            void geom (
                 triangle v2g IN[3],
-                inout TriangleStream<geometryOutput> triStream)
+                inout TriangleStream<g2f> triStream)
             {
             g2f v1;
-            v1.vertexModel = IN[0].vertexModel;
-            v1.vertexAltered = IN[0].tint;
+            v1.vertexAltered = IN[0].vertexClip + float4(0,0,0,-.5);
+            v1.tint = IN[0].tint;
             triStream.Append(v1);
             
             g2f v2;
-            v2.vertexModel = IN[0].vertexModel;
-            v2.vertexAltered = IN[0].tint;
+            v2.vertexAltered = IN[1].vertexClip;
+            v2.tint = IN[1].tint;
             triStream.Append(v2);
             
             g2f v3;
-            v3.vertexModel = IN[0].vertexModel;
-            v3.vertexAltered = IN[0].tint;
+            v3.vertexAltered = IN[2].vertexClip;
+            v3.tint = IN[2].tint;
             triStream.Append(v3);
-            
-            return triStream;
+     
             }
             
             
