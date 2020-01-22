@@ -24,7 +24,7 @@ public class WarpMesh : MonoBehaviour
         {
             float normalizeIndex = (float) i / _oscillationSpeed.Length;
             _oscillationSpeed[i] = Mathf.Lerp(0, MaxOscillationSpeed, normalizeIndex);
-            Debug.Log(_oscillationSpeed[i]);
+            //Debug.Log(_oscillationSpeed[i]);
         }
     }
 
@@ -38,7 +38,7 @@ public class WarpMesh : MonoBehaviour
             float scaledValue = Mathf.Lerp(MinValue, MaxValue, normValue); 
             inputVerts[i] = inputVerts[i] * scaledValue;
         }
-        Debug.Log("baseMesh  "+_baseMesh[0]);
+        //Debug.Log("baseMesh  "+_baseMesh[0]);
 
         _mesh.vertices = inputVerts;
         _mesh.RecalculateBounds();
