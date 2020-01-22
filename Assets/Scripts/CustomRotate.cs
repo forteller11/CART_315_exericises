@@ -13,7 +13,7 @@ public class CustomRotate : MonoBehaviour
          Debug.Log("rotate");
          transform.Rotate(Axis, RotateSpeed);
       }
-      
+       
    }
     
 }
