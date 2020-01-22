@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class CustomRotate : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   public Vector3 Axis = Vector3.one;
+   public float RotateSpeed = 0.02f;
+   void FixedUpdate()
+   {
+      transform.Rotate(Axis, RotateSpeed);
+   }
+    
 }

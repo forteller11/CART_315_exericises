@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e1a1afb3-35c9-4c77-bf00-64ce29f0be1a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CART_315_exericises/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CART_315_exericises/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CART_315_exericises/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CART_315_exericises/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CustomRotate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CustomRotate.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +31,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/MeshManipulatorController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Extensions.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MeshManipulatorManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CustomRotate.cs" />
       </list>
     </option>
   </component>
@@ -92,7 +93,7 @@
       <option name="presentableId" value="Default" />
       <updated>1579104830919</updated>
       <workItem from="1579104863764" duration="4223000" />
-      <workItem from="1579702703577" duration="1419000" />
+      <workItem from="1579702703577" duration="1925000" />
     </task>
     <servers />
   </component>
@@ -113,6 +114,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state x="373" y="65" key="RiderGenerateDialog" timestamp="1579704483583">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="373" y="65" key="RiderGenerateDialog/0.0.1280.680@0.0.1280.680" timestamp="1579704483583" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1579106146535">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
