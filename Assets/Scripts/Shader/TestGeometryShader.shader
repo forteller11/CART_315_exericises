@@ -23,28 +23,29 @@ Shader "Unlit/TestGeometryShader"
 
             struct appdata
             {
-                float4 vertexModelSpace : POSITION;
+                float4 vertexModel : POSITION;
                 float3 normals : NORMAL;
             };
 
-            struct v2f
+            struct v2g
             {
-                float4 vertexClipPos : SV_POSITION;
+                float4 vertexModel: SV_POSITION;
                 float4 tint : COLOR;
-   
             };
             
-            /*struct g2f
+            struct g2f
             {
-                float4 vertexClipPosAltered : SV_POSITION; 
-            };*/
+                float4 vertexAltered : SV_POSITION; 
+                float4 tint: COLOR;
+            };
 
 
-            v2f vert (appdata i)
+            v2g vert (appdata i)
             {
-                v2f o;
-                o.vertexClipPos = UnityObjectToClipPos(i.vertexModelSpace);
-                float4 vertexWorldPos = mul(unity_ObjectToWorld, i.vertexModelSpace);
+                v2g o;
+                //o.vertexClipPos = UnityObjectToClipPos(i.vertexModelSpace);
+                o.vertexModel = i.vertexModel;
+                float4 vertexWorldPos = mul(unity_ObjectToWorld, i.vertexModel);
                 float3 toCamDir = normalize(_WorldSpaceCameraPos - vertexWorldPos.xyz);
                 
                 o.tint = float4(1,1,1,1);
@@ -53,19 +54,33 @@ Shader "Unlit/TestGeometryShader"
                 o.tint.w = 1;
                 return o;
             }
-            /*[maxvertexcount(3)]
-            v2g geo (v2g i, inout TriangleStream<geometryOutput> triStream)
+            
+            [maxvertexcount(3)]
+            v2g geo (
+                triangle v2g IN[3],
+                inout TriangleStream<geometryOutput> triStream)
             {
-                float4 alterPos = float4(0.1,0,0,0);
-                i.vertexClipPos += alterPos;
-                g2f o;
-                o.vertexClipPosAltered = i.vertexClipPos;
-                return o;
-            }*/
+            g2f v1;
+            v1.vertexModel = IN[0].vertexModel;
+            v1.vertexAltered = IN[0].tint;
+            triStream.Append(v1);
+            
+            g2f v2;
+            v2.vertexModel = IN[0].vertexModel;
+            v2.vertexAltered = IN[0].tint;
+            triStream.Append(v2);
+            
+            g2f v3;
+            v3.vertexModel = IN[0].vertexModel;
+            v3.vertexAltered = IN[0].tint;
+            triStream.Append(v3);
+            
+            return triStream;
+            }
             
             
             float4 _Color;
-            fixed4 frag (v2f i) : SV_Target
+            fixed4 frag (g2f i) : SV_Target
             {
                 fixed4 col = _Color;
                 col *= i.tint;

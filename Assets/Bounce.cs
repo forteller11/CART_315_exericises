@@ -16,9 +16,10 @@ public class Bounce : MonoBehaviour
             Debug.Log("RB");
             rb.AddForce(ApplyForce * Time.deltaTime);
         }
-            
-        
-        //other.transform.Translate(ApplyForce);
-        
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        other.GetComponent<AudioSource>().Play();
     }
 }
