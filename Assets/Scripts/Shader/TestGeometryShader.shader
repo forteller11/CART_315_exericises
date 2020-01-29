@@ -30,7 +30,9 @@ Shader "Unlit/TestGeometryShader"
 
             struct v2g
             {
-                float4 vertexClip: POSITION;
+                float4 vertexWorld: POSITION1;
+                float4 vertexClip: POSITION2;
+                float4 camToVert: POSITION3; //where xyz is delta, and w is scalar
                 float4 tint : COLOR;
             };
             
@@ -47,8 +49,13 @@ Shader "Unlit/TestGeometryShader"
                 //o.vertexClipPos = UnityObjectToClipPos(i.vertexModelSpace);
                 o.vertexClip = UnityObjectToClipPos(i.vertexModel);
                 float4 vertexWorldPos = mul(unity_ObjectToWorld, i.vertexModel);
-                float3 toCamDir = normalize(_WorldSpaceCameraPos - vertexWorldPos.xyz);
+                o.vertexWorld = vertexWorldPos;
+                float3 toCam = _WorldSpaceCameraPos - vertexWorldPos.xyz;
+                float toCamDist = length(toCam);
+                float3 toCamDir = normalize(toCam);
                 
+                o.camToVert.xyz = toCamDir;
+                o.camToVert.w = toCamDist;
                 o.tint = float4(1,1,1,1);
                 o.tint.xyz = toCamDir.xyz;
                 o.tint = abs(o.tint);
@@ -63,20 +70,15 @@ Shader "Unlit/TestGeometryShader"
                 triangle v2g IN[3],
                 inout TriangleStream<g2f> triStream)
             {
-            g2f v1;
-            v1.vertexAltered = IN[0].vertexClip + float4(0,0,0,-.5);
-            v1.tint = IN[0].tint;
-            triStream.Append(v1);
             
-            g2f v2;
-            v2.vertexAltered = IN[1].vertexClip;
-            v2.tint = IN[1].tint;
-            triStream.Append(v2);
-            
-            g2f v3;
-            v3.vertexAltered = IN[2].vertexClip;
-            v3.tint = IN[2].tint;
-            triStream.Append(v3);
+            for (int i = 0; i < 3; i ++)
+            {
+                g2f v;
+                float4 pushedAway = IN[i].vertexWorld *2;
+                v.vertexAltered = UnityObjectToClipPos(pushedAway);
+                v.tint = IN[i].tint;
+                triStream.Append(v);
+            }
      
             }
             
